@@ -95,21 +95,22 @@ class Snake:
 
     def draw(self, surface):
         for i in range(len(self.positions)):
+            j = (len(self.positions) - 1) - i
             img = SNAKE_BODY
             increment = TILE_WIDTH / self.speed
             frame = self.frames % self.speed 
             addedPos = frame * increment - TILE_WIDTH
-            if (i == 0):
+            if (j == 0):
                 img = SNAKE_HEAD
-            img = pg.transform.rotate(img, self.directions[i] * 90)
-            if (self.directions[i] == 0):
-                surface.blit(img, (self.positions[i][0] * TILE_WIDTH, self.positions[i][1] * TILE_WIDTH + addedPos))
-            elif (self.directions[i] == 1):
-                surface.blit(img, (self.positions[i][0] * TILE_WIDTH + addedPos, self.positions[i][1] * TILE_WIDTH))
-            elif (self.directions[i] == 2):
-                surface.blit(img, (self.positions[i][0] * TILE_WIDTH, self.positions[i][1] * TILE_WIDTH - addedPos))
-            elif (self.directions[i] == 3):
-                surface.blit(img, (self.positions[i][0] * TILE_WIDTH - addedPos, self.positions[i][1] * TILE_WIDTH))
+            img = pg.transform.rotate(img, self.directions[j] * 90 + 180)
+            if (self.directions[j] == 0):
+                surface.blit(img, (self.positions[j][0] * TILE_WIDTH, self.positions[j][1] * TILE_WIDTH + addedPos))
+            elif (self.directions[j] == 1):
+                surface.blit(img, (self.positions[j][0] * TILE_WIDTH + addedPos, self.positions[j][1] * TILE_WIDTH))
+            elif (self.directions[j] == 2):
+                surface.blit(img, (self.positions[j][0] * TILE_WIDTH, self.positions[j][1] * TILE_WIDTH - addedPos))
+            elif (self.directions[j] == 3):
+                surface.blit(img, (self.positions[j][0] * TILE_WIDTH - addedPos, self.positions[j][1] * TILE_WIDTH))
 
 class Apple:
     def __init__(self, snake):
